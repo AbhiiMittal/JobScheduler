@@ -1,10 +1,15 @@
 package com.project.JobScheduler.Job.EmailJob.dto;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class EmailRequestDTO {
+public class EmailRequestDTO implements Serializable {
+    private static final long serialVersionUID = 1L;
     String user;
     int repeatingTime;
+
+    public EmailRequestDTO() {
+    }
 
     public EmailRequestDTO(String user, int repeatingTime) {
         this.user = user;

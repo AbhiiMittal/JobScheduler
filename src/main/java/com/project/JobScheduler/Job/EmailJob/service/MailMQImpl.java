@@ -8,7 +8,10 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
+
+@Service
 public class MailMQImpl implements MailMQ {
     @Autowired
     EmailService emailService;
@@ -20,9 +23,10 @@ public class MailMQImpl implements MailMQ {
     JobFailureExceptionRepo jobFailureExceptionRepo;
 
     @Override
-    @RabbitListener(queues = "mail-queue")
+    @RabbitListener(queues = "mail-queue", containerFactory = "rabbitListenerContainerFactory")
     public void processEmailQueue(MailMQDTO mailMQDTO) {
         try {
+            System.out.println("processEmailQueue");
             EmailRequestDTO req = mailMQDTO.getEmailRequestDTO();
             String subject = mailMQDTO.getSubject();
             String body = mailMQDTO.getBody();

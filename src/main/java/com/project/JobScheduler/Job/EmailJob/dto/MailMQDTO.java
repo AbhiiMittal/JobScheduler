@@ -1,11 +1,17 @@
 package com.project.JobScheduler.Job.EmailJob.dto;
 
-public class MailMQDTO {
+import java.io.Serializable;
+
+public class MailMQDTO implements Serializable {
+    private static final long serialVersionUID = 1L;
     Long jobId;
     EmailRequestDTO emailRequestDTO;
     String subject;
     String body;
     int retryDelay;
+
+    public MailMQDTO() {
+    }
 
     public MailMQDTO(Long jobId, EmailRequestDTO emailRequestDTO, String subject, String body, int retryDelay) {
         this.jobId = jobId;
